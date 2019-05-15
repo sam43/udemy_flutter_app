@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../model/models.dart';
 
 class ImageList extends StatelessWidget {
@@ -11,15 +12,26 @@ class ImageList extends StatelessWidget {
     return ListView.builder(
       itemCount: images.length,
         itemBuilder: (context, int index) {
-          return Container(
-            margin: EdgeInsets.all(15.0),
-            padding: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black, width: 1.0)
-            ),
-            child: Image.network(images[index].url),
-          ); // Text(images[index].title)
+          return buildImage(images[index]);
         }
+    );
+  }
+
+  Widget buildImage(ImageModel model) {
+    return Container(
+      margin: EdgeInsets.all(15.0),
+      padding: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black, width: 1.0)
+      ),
+      child: Column(
+        children: <Widget>[
+          Image.network(model.url),
+          Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: Text(model.title)) // EdgeInsets.fromLTRB(0,10,0,0)
+        ],
+      ),
     );
   }
 
